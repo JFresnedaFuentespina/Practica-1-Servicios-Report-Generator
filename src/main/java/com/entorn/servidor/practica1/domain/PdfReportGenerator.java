@@ -11,19 +11,21 @@ import java.util.UUID;
 public class PdfReportGenerator implements ReportGenerator {
 
     private final ReportJobFactory reportJobFactory;
+    private ReportJob reportJob;
 
     @Autowired
-    public PdfReportGenerator(ReportJobFactory reportJob) {
-        this.reportJobFactory = reportJob;
+    public PdfReportGenerator(ReportJobFactory reportJobFactory) {
+        this.reportJobFactory = reportJobFactory;
     }
 
     @Override
     public String generarInforme() {
-        return "INFORME PDF: " + this.reportJobFactory.createReportJob().getId();
+        reportJob = reportJobFactory.createReportJob();
+        return "INFORME PDF: " + reportJob.getId();
     }
 
     @Override
     public String getId() {
-        return this.reportJobFactory.createReportJob().getId();
+        return reportJob.getId();
     }
 }

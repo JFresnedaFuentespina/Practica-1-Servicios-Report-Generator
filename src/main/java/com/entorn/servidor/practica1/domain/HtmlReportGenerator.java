@@ -9,7 +9,8 @@ import java.util.UUID;
 @Component
 public class HtmlReportGenerator implements ReportGenerator {
 
-    private ReportJobFactory reportJobFactory;
+    private final ReportJobFactory reportJobFactory;
+    private ReportJob reportJob;
 
     @Autowired
     public HtmlReportGenerator(ReportJobFactory reportJobFactory) {
@@ -18,11 +19,12 @@ public class HtmlReportGenerator implements ReportGenerator {
 
     @Override
     public String generarInforme() {
-        return "INFORME HTML: " + this.reportJobFactory.createReportJob().getId();
+        reportJob = reportJobFactory.createReportJob();
+        return "INFORME HTML: " + reportJob.getId();
     }
 
     @Override
     public String getId() {
-        return this.reportJobFactory.createReportJob().getId();
+        return reportJob.getId();
     }
 }

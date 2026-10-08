@@ -12,19 +12,21 @@ import java.io.StringWriter;
 public class CsvReportGenerator implements ReportGenerator {
     private final ReportJobFactory reportJobFactory;
     private final CsvFormatGenerator csvFormatGenerator;
+    private ReportJob reportJob;
 
     @Autowired
-    public CsvReportGenerator(ReportJobFactory reportJob,
+    public CsvReportGenerator(ReportJobFactory reportJobFactory,
                               CsvFormatGenerator csvFormatGenerator) {
-        this.reportJobFactory = reportJob;
+        this.reportJobFactory = reportJobFactory;
         this.csvFormatGenerator = csvFormatGenerator;
     }
 
 
     @Override
     public String generarInforme() {
-        String id = this.reportJobFactory.createReportJob().getId();
-        CSVFormat format = this.csvFormatGenerator.getFormat();
+        reportJob = reportJobFactory.createReportJob();
+        String id = reportJob.getId();
+        CSVFormat format = csvFormatGenerator.getFormat();
         String contenido = "Informe " + id;
         StringWriter writer = new StringWriter();
 
@@ -38,6 +40,6 @@ public class CsvReportGenerator implements ReportGenerator {
 
     @Override
     public String getId() {
-        return this.reportJobFactory.createReportJob().getId();
+        return this.reportJob.getId();
     }
 }
