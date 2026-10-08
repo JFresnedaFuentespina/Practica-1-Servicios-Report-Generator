@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/report")
 class ReportsController {
     private ReportService reportService;
 
@@ -38,7 +38,6 @@ class ReportsController {
 
     @GetMapping("/export")
     public String export() {
-        this.reportService.exportar();
-        return "Comprueba la consola para ver los datos de la cache!";
+        return this.reportService.exportar();
     }
 }

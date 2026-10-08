@@ -91,7 +91,7 @@ public class ReportService {
         this.watermark = watermark;
     }
 
-    public void exportar() {
+    public String exportar() {
         this.exportEngine.showCache(this.cache.getReports());
     }
 

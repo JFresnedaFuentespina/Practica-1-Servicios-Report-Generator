@@ -20,9 +20,17 @@ public class ExportEngine {
         System.out.println("Constructor ExportEngine inicializado!");
     }
 
-    public void showCache(HashMap<String, String> reports) {
+    public String showCache(HashMap<String, String> reports) {
+        StringBuilder cache = new StringBuilder();
+
         reports.forEach((id, type) -> {
-            System.out.println("Informe: " + id + " tipo: " + type);
+            cache.append("Informe ")
+                    .append(id)
+                    .append(" tipo ")
+                    .append(type)
+                    .append("\n");
         });
+
+        return cache.toString();
     }
 }
