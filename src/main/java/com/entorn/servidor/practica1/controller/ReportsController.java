@@ -35,4 +35,10 @@ class ReportsController {
     public String showStats() {
         return this.reportService.showStats();
     }
+
+    @GetMapping("/export")
+    public String export() {
+        this.reportService.exportar();
+        return "Comprueba la consola para ver los datos de la cache!";
+    }
 }

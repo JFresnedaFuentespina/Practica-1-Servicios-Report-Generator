@@ -5,6 +5,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,23 +20,26 @@ public class ReportService {
 
     private ReportCache cache;
 
+    private ExportEngine exportEngine;
+
     @Autowired
     public ReportService(ReportGenerator pdfReportGenerator,
                          @Qualifier("htmlReportGenerator") ReportGenerator htmlReportGenerator,
                          @Qualifier("csvReportGenerator") ReportGenerator csvReportGenerator,
                          ReportStatistics reportStatistics,
-                         ReportCache cache) {
+                         ReportCache cache,
+                         @Lazy ExportEngine exportEngine) {
         this.pdfReportGenerator = pdfReportGenerator;
         this.htmlReportGenerator = htmlReportGenerator;
         this.csvReportGenerator = csvReportGenerator;
         this.reportStatistics = reportStatistics;
         this.cache = cache;
+        this.exportEngine = exportEngine;
     }
 
     @PostConstruct
     public void initCache() {
         cache.initReports();
-        cache.printCache();
     }
 
     @PreDestroy
@@ -77,7 +81,6 @@ public class ReportService {
     }
 
     public String showStats() {
-        cache.printCache();
         return "HTML: " + reportStatistics.getContadorHtml() +
                 "\nCSV: " + reportStatistics.getContadorCsv() +
                 "\nPDF: " + reportStatistics.getContadorPdf();
@@ -88,8 +91,8 @@ public class ReportService {
         this.watermark = watermark;
     }
 
-    public void printCache() {
-        cache.printCache();
+    public void exportar() {
+        this.exportEngine.showCache(this.cache.getReports());
     }
 
     public String getWatermak() {

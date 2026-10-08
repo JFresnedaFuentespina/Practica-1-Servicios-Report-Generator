@@ -31,9 +31,7 @@ public class ReportCache {
         System.out.println(">> Cache inicializado!");
     }
 
-    public void printCache() {
-        reports.forEach((id, type) -> {
-            System.out.println("Informe: " + id + " tipo : " + type);
-        });
+    public HashMap<String, String> getReports() {
+        return reports;
     }
 }
