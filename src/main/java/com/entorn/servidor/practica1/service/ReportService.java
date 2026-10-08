@@ -92,7 +92,7 @@ public class ReportService {
     }
 
     public String exportar() {
-        this.exportEngine.showCache(this.cache.getReports());
+        return this.exportEngine.showCache(this.cache.getReports());
     }
 
     public String getWatermak() {
