@@ -23,7 +23,7 @@ public class ReportService {
     private ExportEngine exportEngine;
 
     @Autowired
-    public ReportService(ReportGenerator pdfReportGenerator,
+    public ReportService(@Qualifier("pdfReportGenerator") ReportGenerator pdfReportGenerator,
                          @Qualifier("htmlReportGenerator") ReportGenerator htmlReportGenerator,
                          @Qualifier("csvReportGenerator") ReportGenerator csvReportGenerator,
                          ReportStatistics reportStatistics,
