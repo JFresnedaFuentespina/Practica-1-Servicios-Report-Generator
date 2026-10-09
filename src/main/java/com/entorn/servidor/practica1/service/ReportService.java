@@ -94,8 +94,4 @@ public class ReportService {
     public String exportar() {
         return this.exportEngine.showCache(this.cache.getReports());
     }
-
-    public String getWatermak() {
-        return this.watermark.getWatermark();
-    }
 }

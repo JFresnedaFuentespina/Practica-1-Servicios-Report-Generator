@@ -13,11 +13,6 @@ public class ReportCache {
         reports.put(id, type);
     }
 
-    public void deleteReport(String id) {
-        System.out.println("Eliminando informe: " + id);
-        reports.remove(id);
-    }
-
     public void clearReports() {
         System.out.println("Limpiando cache...");
         reports.clear();
